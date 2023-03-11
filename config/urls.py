@@ -1,21 +1,39 @@
-"""config URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+from rest_framework.permissions import IsAuthenticated
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+admin.site.site_header = 'Assessment'
+admin.site.site_title = 'Assessment Admin Panel'
+admin.site.index_title = 'Assessment Admin'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include([
+        path('auth/', include('djoser.urls')),
+        path('auth/', include('djoser.urls.jwt')),
+        path('users/', include('users.api.urls', namespace='users')),
+    ]))
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+API_INFO = openapi.Info(
+    title = 'Assessment API',
+    default_version = 'v1',
+    description = 'API documentation of Assessment App'
+)
+
+API_DOCS_SCHEMA_VIEWS = get_schema_view(
+    API_INFO,
+    public = True,
+    permission_classes = [IsAuthenticated, ],
+)
+
+urlpatterns += [
+    path('api-docs/', API_DOCS_SCHEMA_VIEWS.with_ui("swagger", cache_timeout=0), name='API Playground')
 ]

@@ -53,12 +53,12 @@ INSTALLED_APPS = [
 ]
 
 LOCAL_APPS = [
-
+    'users',
 ]
     
 THIRD_PARTY_APPS = [
     'rest_framework',
-    'drf_yasg', #For Api docs``
+    'drf_yasg',
     'djoser',
     'corsheaders'
 ]
@@ -68,7 +68,7 @@ INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', #for allowing the client application
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -200,3 +200,7 @@ EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', False)
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# This is a setting that tells Django to use the CustomUser model as the user model.
+AUTH_USER_MODEL = 'users.CustomUser'

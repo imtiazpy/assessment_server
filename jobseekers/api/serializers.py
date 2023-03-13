@@ -9,7 +9,7 @@ from jobseekers.models import JobSeekerProfile
 User = get_user_model()
 
 class JobSeekerProfileSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = JobSeekerProfile
         fields = (
             'id',

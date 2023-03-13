@@ -56,13 +56,16 @@ LOCAL_APPS = [
     'users',
     'employers',
     'jobseekers',
+    'assessments',
+    'questions',
 ]
     
 THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_yasg',
     'djoser',
-    'corsheaders'
+    'corsheaders',
+    'django_filters',
 ]
 
 INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS

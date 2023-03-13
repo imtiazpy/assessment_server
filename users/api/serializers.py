@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
 
@@ -21,3 +22,7 @@ class AvatarUploadSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ('avatar', )
+
+class UserActivationSerializer(serializers.Serializer):
+    uid = serializers.CharField()
+    token = serializers.CharField()

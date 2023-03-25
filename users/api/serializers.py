@@ -22,7 +22,9 @@ class AvatarUploadSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ('avatar', )
+        
 
+# "This class is a serializer that takes a uid and token and validates them."
 class UserActivationSerializer(serializers.Serializer):
     uid = serializers.CharField()
     token = serializers.CharField()

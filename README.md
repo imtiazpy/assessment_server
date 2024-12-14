@@ -13,7 +13,7 @@ This will activate the virtual environment.
 
 ## Now install the dependencies:
 
-`pipenv install -r requirements.txt`
+`pipenv install`
 
 
 

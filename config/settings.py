@@ -41,6 +41,8 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=['http://localho
 # This is for allowing the client application to access the backend.
 CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=['http://localhost:3000', 'http://localhost:8000'])
 
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,13 +58,16 @@ LOCAL_APPS = [
     'users',
     'employers',
     'jobseekers',
+    'assessments',
+    'questions',
 ]
     
 THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_yasg',
     'djoser',
-    'corsheaders'
+    'corsheaders',
+    'django_filters',
 ]
 
 INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
@@ -168,8 +173,8 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
 }
 
 # Settings for Djoser
@@ -185,8 +190,8 @@ DJOSER = {
     'ACTIVATION_URL': 'api/v1/users/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
-        'user_create': 'users.api.serializers.UserCreateSerializer',
-        'user': 'users.api.serializers.UserCreateSerializer',
+        'user_create': 'users.api.serializers.UserSerializer',
+        'user': 'users.api.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }

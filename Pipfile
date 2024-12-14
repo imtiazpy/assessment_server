@@ -13,6 +13,7 @@ pillow = "*"
 django-cors-headers = "*"
 drf-yasg = "*"
 django-environ = "*"
+django-filter = "*"
 
 [dev-packages]
 

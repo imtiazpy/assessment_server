@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, redirect
 import requests
 
-from users.api.serializers import AvatarUploadSerializer
+from users.api.serializers import AvatarUploadSerializer, UserActivationSerializer
 
 
 User = get_user_model()
@@ -27,13 +27,15 @@ class UserActivationView(generics.GenericAPIView):
 
     permission_classes = [AllowAny]
 
+    serializer_class = UserActivationSerializer
+
     def get(self, request, uid, token, format=None):
         payload = {'uid': uid, 'token': token}
 
         # activation endpoint from Djoser
         url = 'http://127.0.0.1:8000/api/v1/auth/users/activation/'
 
-        response = requests.post(url, data=payload)
+        requests.post(url, data=payload)
 
         # redirect to frontend upon activation successfull
         return redirect('http://localhost:3000/activation-success')

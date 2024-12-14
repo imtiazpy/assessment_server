@@ -6,9 +6,9 @@ from djoser.serializers import UserCreateSerializer
 
 User = get_user_model()
 
-class UserCreateSerializer(UserCreateSerializer):
+class UserSerializer(UserCreateSerializer):
     """
-    This code defines a customized serializer class UserCreateSerializer that inherits from djoser.serializers.UserCreateSerializer. It includes the type field and is referenced in the settings.py file under the DJOSER object. The serializer will not be used directly in any views, but rather with djoser endpoints for handling user registration requests.
+    This code defines a customized serializer class UserSerializer that inherits from djoser.serializers.UserCreateSerializer. It includes the type field and is referenced in the settings.py file under the DJOSER object. The serializer will not be used directly in any views, but rather with djoser endpoints for handling user registration requests.
     """
     class Meta:
         model = User
